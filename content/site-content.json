@@ -1,0 +1,1657 @@
+{
+  "header": {
+    "logoSrc": "/uploads/logo.png",
+    "logoText": "HS Architects"
+  },
+  "gallery": {
+    "rows": [
+      {
+        "id": "gallery-exterior",
+        "aspect": 4.0615,
+        "items": [
+          {
+            "id": "ext-1",
+            "src": "/uploads/exterior-tower-facade.jpg",
+            "alt": "Tower facade",
+            "span": 0.5424360795454546
+          },
+          {
+            "id": "ext-2",
+            "src": "/uploads/exterior-entrance-pool.jpg",
+            "alt": "Entrance with reflecting pool",
+            "span": 1.4575639204545454
+          },
+          {
+            "id": "ext-3",
+            "src": "/uploads/exterior-covered-walkway.jpg",
+            "alt": "Covered walkway",
+            "span": 1
+          }
+        ]
+      },
+      {
+        "id": "gallery-interior",
+        "aspect": 3.0698,
+        "items": [
+          {
+            "id": "int-1",
+            "src": "/uploads/interior-living-room.jpg",
+            "alt": "Living room",
+            "span": 1
+          },
+          {
+            "id": "int-2",
+            "src": "/uploads/interior-lounge.jpg",
+            "alt": "Lounge and waiting area",
+            "span": 1
+          },
+          {
+            "id": "int-3",
+            "src": "/uploads/interior-dining.jpg",
+            "alt": "Dining area",
+            "span": 1
+          },
+          {
+            "id": "int-4",
+            "src": "/uploads/interior-screen-detail.jpg",
+            "alt": "Decorative screen detail",
+            "span": 1
+          }
+        ]
+      }
+    ]
+  },
+  "studio": {
+    "intro": [
+      {
+        "id": "intro-1",
+        "text": "We believe architecture begins with understanding—of place, people and purpose. Every project is shaped by its context, guided by light, material and landscape, and resolved with clarity rather than excess."
+      },
+      {
+        "id": "intro-2",
+        "text": "Since 2004, HS Architects has applied this philosophy across residences, workplaces, commercial developments, institutions and hospitality projects."
+      },
+      {
+        "id": "intro-3",
+        "text": "Regardless of scale, our aim remains the same: to create architecture that feels natural, endures over time and enriches everyday life."
+      }
+    ],
+    "principles": [
+      {
+        "id": "context",
+        "heading": "Context",
+        "text": "Every project begins with an understanding of its place."
+      },
+      {
+        "id": "light",
+        "heading": "Light",
+        "text": "Light shapes atmosphere, movement and experience."
+      },
+      {
+        "id": "material",
+        "heading": "Material",
+        "text": "Material brings scale, texture and permanence to architecture."
+      },
+      {
+        "id": "nature",
+        "heading": "Nature",
+        "text": "Architecture is strongest when it establishes a meaningful relationship with its surroundings."
+      },
+      {
+        "id": "simplicity",
+        "heading": "Simplicity",
+        "text": "We seek clarity over excess, allowing the essential to become visible."
+      }
+    ],
+    "images": [
+      {
+        "id": "studio-1",
+        "src": "/uploads/studio-1.jpg",
+        "alt": "Studio photo one"
+      },
+      {
+        "id": "studio-2",
+        "src": "/uploads/studio-2.jpg",
+        "alt": "Studio photo two"
+      },
+      {
+        "id": "studio-3",
+        "src": "/uploads/studio-3.jpg",
+        "alt": "Studio photo three"
+      }
+    ]
+  },
+  "about": {
+    "people": [
+      {
+        "id": "hemal",
+        "name": "Hemal Surti",
+        "role": "Founder and Principal Architect",
+        "paragraphs": [
+          {
+            "id": "hemal-p1",
+            "text": "With over two decades of experience, Hemal Surti leads projects across architecture and the built environment, spanning commercial developments, hospitality, institutions, housing and bespoke residences."
+          },
+          {
+            "id": "hemal-p2",
+            "text": "His approach combines strategic thinking with hands-on involvement throughout the design process, enabling every project to respond thoughtfully to its context, constraints and ambitions."
+          },
+          {
+            "id": "hemal-p3",
+            "text": "He believes architecture should be clear in its intent, rigorous in its execution and enduring in its relevance."
+          }
+        ],
+        "image": {
+          "id": "hemal-photo",
+          "src": "/uploads/studio-1.jpg",
+          "alt": "Hemal Surti at his desk"
+        },
+        "cards": [
+          {
+            "id": "hemal-experience",
+            "heading": "Experience",
+            "text": "20+ years of experience in architecture, interiors and project leadership."
+          },
+          {
+            "id": "hemal-leadership",
+            "heading": "Leadership",
+            "text": "Guiding multidisciplinary teams to deliver meaningful and impactful design solutions."
+          },
+          {
+            "id": "hemal-philosophy",
+            "heading": "Philosophy",
+            "text": "Design with context. Build with purpose."
+          }
+        ]
+      },
+      {
+        "id": "saretta",
+        "name": "Saretta Surti",
+        "role": "Co-Founder and Principal Architect",
+        "paragraphs": [
+          {
+            "id": "saretta-p1",
+            "text": "Saretta Surti approaches architecture through an intuitive understanding of place, material and human experience."
+          },
+          {
+            "id": "saretta-p2",
+            "text": "Her work explores the relationship between buildings and their surroundings—from complex natural landscapes to compact urban sites—creating spaces where practicality, comfort and aesthetics exist in balance."
+          },
+          {
+            "id": "saretta-p3",
+            "text": "Her approach is rooted in empathy, functionality and attention to detail, resulting in environments that are timeless, inspiring and thoughtfully tailored to each client."
+          },
+          {
+            "id": "saretta-p4",
+            "text": "She leads with creativity and sensitivity, ensuring every project is carefully considered and beautifully executed."
+          }
+        ],
+        "image": {
+          "id": "saretta-photo",
+          "src": "/uploads/studio-2.jpg",
+          "alt": "Saretta Surti at her desk"
+        },
+        "cards": [
+          {
+            "id": "saretta-experience",
+            "heading": "Experience",
+            "text": "20+ years of experience in architecture, interiors and project leadership."
+          },
+          {
+            "id": "saretta-approach",
+            "heading": "Approach",
+            "text": "Balancing aesthetics, functionality and context in every detail."
+          },
+          {
+            "id": "saretta-philosophy",
+            "heading": "Philosophy",
+            "text": "Good design creates spaces that enrich everyday life and stand the test of time."
+          }
+        ]
+      }
+    ],
+    "together": {
+      "eyebrow": "TOGETHER",
+      "lines": [
+        {
+          "id": "together-line-1",
+          "text": "Complementary perspectives"
+        },
+        {
+          "id": "together-line-2",
+          "text": "A shared design ethic"
+        }
+      ],
+      "text": "Together, Hemal and Saretta combine strategic leadership with intuitive design thinking. Their complementary strengths enable the practice to deliver architecture that is technically rigorous, contextually responsive and deeply human. Every project benefits from a balance of creativity, experience and careful collaboration, resulting in spaces that are both timeless and meaningful."
+    }
+  },
+  "projects": {
+    "sections": [
+      {
+        "id": "architecture",
+        "heading": "Architecture",
+        "links": [
+          {
+            "id": "holiday-homes",
+            "label": "Holiday Homes",
+            "projects": [
+              {
+                "id": "hillside-retreat",
+                "title": "Hillside Retreat",
+                "meta": {
+                  "area": "6,400 sq. ft",
+                  "location": "Lonavala",
+                  "year": "2021-2023",
+                  "type": "Residential"
+                },
+                "description": [
+                  {
+                    "id": "hillside-retreat-p1",
+                    "text": "The brief asked for a building that would sit quietly in its setting while giving every room a clear relationship to the landscape around it. The plan is organised around a shaded central court that draws air and light deep into the interior."
+                  },
+                  {
+                    "id": "hillside-retreat-p2",
+                    "text": "Materials are kept deliberately few — board-marked concrete, lime plaster and local stone — so that the architecture reads as one continuous surface, weathering slowly and evenly over time."
+                  },
+                  {
+                    "id": "hillside-retreat-p3",
+                    "text": "Openings are placed to frame specific views rather than to maximise glazing, keeping the interior cool through the warmest months and giving each space its own particular quality of light."
+                  }
+                ],
+                "caption": "SITTING IN THE SLOPE",
+                "rows": [
+                  {
+                    "id": "hillside-retreat-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "hillside-retreat-img-1",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hillside-retreat-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "hillside-retreat-img-2",
+                        "src": "/uploads/exterior-entrance-pool.jpg",
+                        "alt": "Entrance pool",
+                        "span": 0.9882356162383178
+                      },
+                      {
+                        "id": "hillside-retreat-img-3",
+                        "src": "/uploads/exterior-covered-walkway.jpg",
+                        "alt": "Covered walkway",
+                        "span": 1.0117643837616823
+                      }
+                    ]
+                  },
+                  {
+                    "id": "hillside-retreat-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "hillside-retreat-img-4",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 0.9409407856308412
+                      },
+                      {
+                        "id": "hillside-retreat-img-5",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1.0590592143691588
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "coastal-villa",
+                "title": "Coastal Villa",
+                "meta": {
+                  "area": "8,100 sq. ft",
+                  "location": "Alibaug",
+                  "year": "2022-2024",
+                  "type": "Residential"
+                },
+                "description": [
+                  {
+                    "id": "coastal-villa-p1",
+                    "text": "The brief asked for a building that would sit quietly in its setting while giving every room a clear relationship to the landscape around it. The plan is organised around a shaded central court that draws air and light deep into the interior."
+                  },
+                  {
+                    "id": "coastal-villa-p2",
+                    "text": "Materials are kept deliberately few — board-marked concrete, lime plaster and local stone — so that the architecture reads as one continuous surface, weathering slowly and evenly over time."
+                  },
+                  {
+                    "id": "coastal-villa-p3",
+                    "text": "Openings are placed to frame specific views rather than to maximise glazing, keeping the interior cool through the warmest months and giving each space its own particular quality of light."
+                  }
+                ],
+                "caption": "OPEN TO THE SEA",
+                "rows": [
+                  {
+                    "id": "coastal-villa-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "coastal-villa-img-1",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "coastal-villa-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "coastal-villa-img-2",
+                        "src": "/uploads/exterior-entrance-pool.jpg",
+                        "alt": "Entrance pool",
+                        "span": 1
+                      },
+                      {
+                        "id": "coastal-villa-img-3",
+                        "src": "/uploads/exterior-covered-walkway.jpg",
+                        "alt": "Covered walkway",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "coastal-villa-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "coastal-villa-img-4",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      },
+                      {
+                        "id": "coastal-villa-img-5",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "commercial-spaces",
+            "label": "Commercial spaces",
+            "projects": [
+              {
+                "id": "boutique-workspaces",
+                "title": "Boutique Workspaces",
+                "meta": {
+                  "area": "90,000 sq. ft",
+                  "location": "Mumbai",
+                  "year": "2023-2026",
+                  "type": "Commercial"
+                },
+                "description": [
+                  {
+                    "id": "boutique-workspaces-p1",
+                    "text": "Rising 70 metres above the city, this boutique commercial tower reimagines the contemporary workplace through a balance of structure, light and landscape. Designed within a dense urban setting, the building is conceived as a collection of flexible, private workspaces connected by generous terraces and shared breakout areas."
+                  },
+                  {
+                    "id": "boutique-workspaces-p2",
+                    "text": "A layered facade of solid and glazed elements creates depth, filters sunlight and enhances privacy, while perforated screens and integrated planting improve comfort and environmental performance. A restrained material palette, expressed through a strong structural grid, gives the building a timeless architectural character."
+                  },
+                  {
+                    "id": "boutique-workspaces-p3",
+                    "text": "The result is a contemporary commercial landmark that responds to its climate, enriches the workplace experience and contributes confidently to the evolving urban skyline."
+                  }
+                ],
+                "caption": "FACADE LANGUAGE",
+                "rows": [
+                  {
+                    "id": "boutique-workspaces-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "boutique-workspaces-img-1",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "boutique-workspaces-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "boutique-workspaces-img-2",
+                        "src": "/uploads/exterior-entrance-pool.jpg",
+                        "alt": "Entrance pool",
+                        "span": 1
+                      },
+                      {
+                        "id": "boutique-workspaces-img-3",
+                        "src": "/uploads/exterior-covered-walkway.jpg",
+                        "alt": "Covered walkway",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "boutique-workspaces-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "boutique-workspaces-img-4",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      },
+                      {
+                        "id": "boutique-workspaces-img-5",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "market-pavilion",
+                "title": "Market Pavilion",
+                "meta": {
+                  "area": "24,000 sq. ft",
+                  "location": "Pune",
+                  "year": "2020-2022",
+                  "type": "Commercial"
+                },
+                "description": [
+                  {
+                    "id": "market-pavilion-p1",
+                    "text": "The brief asked for a building that would sit quietly in its setting while giving every room a clear relationship to the landscape around it. The plan is organised around a shaded central court that draws air and light deep into the interior."
+                  },
+                  {
+                    "id": "market-pavilion-p2",
+                    "text": "Materials are kept deliberately few — board-marked concrete, lime plaster and local stone — so that the architecture reads as one continuous surface, weathering slowly and evenly over time."
+                  },
+                  {
+                    "id": "market-pavilion-p3",
+                    "text": "Openings are placed to frame specific views rather than to maximise glazing, keeping the interior cool through the warmest months and giving each space its own particular quality of light."
+                  }
+                ],
+                "caption": "A ROOF FOR THE STREET",
+                "rows": [
+                  {
+                    "id": "market-pavilion-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "market-pavilion-img-1",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "market-pavilion-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "market-pavilion-img-2",
+                        "src": "/uploads/exterior-entrance-pool.jpg",
+                        "alt": "Entrance pool",
+                        "span": 1
+                      },
+                      {
+                        "id": "market-pavilion-img-3",
+                        "src": "/uploads/exterior-covered-walkway.jpg",
+                        "alt": "Covered walkway",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "market-pavilion-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "market-pavilion-img-4",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      },
+                      {
+                        "id": "market-pavilion-img-5",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "housing-residential",
+            "label": "Housing and Residential",
+            "projects": [
+              {
+                "id": "courtyard-houses",
+                "title": "Courtyard Houses",
+                "meta": {
+                  "area": "42,000 sq. ft",
+                  "location": "Ahmedabad",
+                  "year": "2019-2022",
+                  "type": "Residential"
+                },
+                "description": [
+                  {
+                    "id": "courtyard-houses-p1",
+                    "text": "The brief asked for a building that would sit quietly in its setting while giving every room a clear relationship to the landscape around it. The plan is organised around a shaded central court that draws air and light deep into the interior."
+                  },
+                  {
+                    "id": "courtyard-houses-p2",
+                    "text": "Materials are kept deliberately few — board-marked concrete, lime plaster and local stone — so that the architecture reads as one continuous surface, weathering slowly and evenly over time."
+                  },
+                  {
+                    "id": "courtyard-houses-p3",
+                    "text": "Openings are placed to frame specific views rather than to maximise glazing, keeping the interior cool through the warmest months and giving each space its own particular quality of light."
+                  }
+                ],
+                "caption": "SHARED GROUND",
+                "rows": [
+                  {
+                    "id": "courtyard-houses-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "courtyard-houses-img-1",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "courtyard-houses-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "courtyard-houses-img-2",
+                        "src": "/uploads/exterior-entrance-pool.jpg",
+                        "alt": "Entrance pool",
+                        "span": 1
+                      },
+                      {
+                        "id": "courtyard-houses-img-3",
+                        "src": "/uploads/exterior-covered-walkway.jpg",
+                        "alt": "Covered walkway",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "courtyard-houses-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "courtyard-houses-img-4",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      },
+                      {
+                        "id": "courtyard-houses-img-5",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "terrace-apartments",
+                "title": "Terrace Apartments",
+                "meta": {
+                  "area": "68,000 sq. ft",
+                  "location": "Mumbai",
+                  "year": "2022-2025",
+                  "type": "Residential"
+                },
+                "description": [
+                  {
+                    "id": "terrace-apartments-p1",
+                    "text": "The brief asked for a building that would sit quietly in its setting while giving every room a clear relationship to the landscape around it. The plan is organised around a shaded central court that draws air and light deep into the interior."
+                  },
+                  {
+                    "id": "terrace-apartments-p2",
+                    "text": "Materials are kept deliberately few — board-marked concrete, lime plaster and local stone — so that the architecture reads as one continuous surface, weathering slowly and evenly over time."
+                  },
+                  {
+                    "id": "terrace-apartments-p3",
+                    "text": "Openings are placed to frame specific views rather than to maximise glazing, keeping the interior cool through the warmest months and giving each space its own particular quality of light."
+                  }
+                ],
+                "caption": "STACKED GARDENS",
+                "rows": [
+                  {
+                    "id": "terrace-apartments-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "terrace-apartments-img-1",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "terrace-apartments-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "terrace-apartments-img-2",
+                        "src": "/uploads/exterior-entrance-pool.jpg",
+                        "alt": "Entrance pool",
+                        "span": 1
+                      },
+                      {
+                        "id": "terrace-apartments-img-3",
+                        "src": "/uploads/exterior-covered-walkway.jpg",
+                        "alt": "Covered walkway",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "terrace-apartments-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "terrace-apartments-img-4",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      },
+                      {
+                        "id": "terrace-apartments-img-5",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "master-planning",
+            "label": "Master Planning",
+            "projects": [
+              {
+                "id": "riverfront-quarter",
+                "title": "Riverfront Quarter",
+                "meta": {
+                  "area": "18 acres",
+                  "location": "Surat",
+                  "year": "2021-2026",
+                  "type": "Master Plan"
+                },
+                "description": [
+                  {
+                    "id": "riverfront-quarter-p1",
+                    "text": "The brief asked for a building that would sit quietly in its setting while giving every room a clear relationship to the landscape around it. The plan is organised around a shaded central court that draws air and light deep into the interior."
+                  },
+                  {
+                    "id": "riverfront-quarter-p2",
+                    "text": "Materials are kept deliberately few — board-marked concrete, lime plaster and local stone — so that the architecture reads as one continuous surface, weathering slowly and evenly over time."
+                  },
+                  {
+                    "id": "riverfront-quarter-p3",
+                    "text": "Openings are placed to frame specific views rather than to maximise glazing, keeping the interior cool through the warmest months and giving each space its own particular quality of light."
+                  }
+                ],
+                "caption": "EDGE AND WATER",
+                "rows": [
+                  {
+                    "id": "riverfront-quarter-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "riverfront-quarter-img-1",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "riverfront-quarter-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "riverfront-quarter-img-2",
+                        "src": "/uploads/exterior-entrance-pool.jpg",
+                        "alt": "Entrance pool",
+                        "span": 1
+                      },
+                      {
+                        "id": "riverfront-quarter-img-3",
+                        "src": "/uploads/exterior-covered-walkway.jpg",
+                        "alt": "Covered walkway",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "riverfront-quarter-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "riverfront-quarter-img-4",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      },
+                      {
+                        "id": "riverfront-quarter-img-5",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "campus-masterplan",
+                "title": "Campus Masterplan",
+                "meta": {
+                  "area": "32 acres",
+                  "location": "Nashik",
+                  "year": "2023-2027",
+                  "type": "Master Plan"
+                },
+                "description": [
+                  {
+                    "id": "campus-masterplan-p1",
+                    "text": "The brief asked for a building that would sit quietly in its setting while giving every room a clear relationship to the landscape around it. The plan is organised around a shaded central court that draws air and light deep into the interior."
+                  },
+                  {
+                    "id": "campus-masterplan-p2",
+                    "text": "Materials are kept deliberately few — board-marked concrete, lime plaster and local stone — so that the architecture reads as one continuous surface, weathering slowly and evenly over time."
+                  },
+                  {
+                    "id": "campus-masterplan-p3",
+                    "text": "Openings are placed to frame specific views rather than to maximise glazing, keeping the interior cool through the warmest months and giving each space its own particular quality of light."
+                  }
+                ],
+                "caption": "WALKING DISTANCES",
+                "rows": [
+                  {
+                    "id": "campus-masterplan-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "campus-masterplan-img-1",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "campus-masterplan-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "campus-masterplan-img-2",
+                        "src": "/uploads/exterior-entrance-pool.jpg",
+                        "alt": "Entrance pool",
+                        "span": 1
+                      },
+                      {
+                        "id": "campus-masterplan-img-3",
+                        "src": "/uploads/exterior-covered-walkway.jpg",
+                        "alt": "Covered walkway",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "campus-masterplan-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "campus-masterplan-img-4",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      },
+                      {
+                        "id": "campus-masterplan-img-5",
+                        "src": "/uploads/exterior-tower-facade.jpg",
+                        "alt": "Tower facade",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "rows": [
+          {
+            "id": "architecture-row-1",
+            "aspect": 3.1169,
+            "items": [
+              {
+                "id": "architecture-1",
+                "src": "/uploads/exterior-tower-facade.jpg",
+                "alt": "Tower facade",
+                "span": 1
+              },
+              {
+                "id": "architecture-2",
+                "src": "/uploads/exterior-entrance-pool.jpg",
+                "alt": "Entrance pool",
+                "span": 1
+              }
+            ]
+          },
+          {
+            "id": "architecture-row-2",
+            "aspect": 3.1169,
+            "items": [
+              {
+                "id": "architecture-4",
+                "src": "/uploads/exterior-tower-facade.jpg",
+                "alt": "Tower facade",
+                "span": 1
+              },
+              {
+                "id": "architecture-5",
+                "src": "/uploads/exterior-entrance-pool.jpg",
+                "alt": "Entrance pool",
+                "span": 1
+              },
+              {
+                "id": "architecture-6",
+                "src": "/uploads/exterior-covered-walkway.jpg",
+                "alt": "Covered walkway",
+                "span": 1
+              }
+            ]
+          },
+          {
+            "id": "architecture-row-3",
+            "aspect": 3.1169,
+            "items": [
+              {
+                "id": "architecture-7",
+                "src": "/uploads/exterior-tower-facade.jpg",
+                "alt": "Tower facade",
+                "span": 1
+              },
+              {
+                "id": "architecture-8",
+                "src": "/uploads/exterior-entrance-pool.jpg",
+                "alt": "Entrance pool",
+                "span": 1
+              },
+              {
+                "id": "architecture-9",
+                "src": "/uploads/exterior-covered-walkway.jpg",
+                "alt": "Covered walkway",
+                "span": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "interior-design",
+        "heading": "Interior Design",
+        "links": [
+          {
+            "id": "homes",
+            "label": "Homes",
+            "projects": [
+              {
+                "id": "apartment-eleven",
+                "title": "Apartment Eleven",
+                "meta": {
+                  "area": "3,200 sq. ft",
+                  "location": "Mumbai",
+                  "year": "2022-2023",
+                  "type": "Interior"
+                },
+                "description": [
+                  {
+                    "id": "apartment-eleven-p1",
+                    "text": "The interior is planned as a sequence of connected rooms rather than a single open volume, so that each part of the home holds its own scale and character while remaining visually linked to the next."
+                  },
+                  {
+                    "id": "apartment-eleven-p2",
+                    "text": "A warm, muted palette of oiled timber, raw linen and hand-finished plaster runs throughout, letting the furniture and the changing daylight provide the contrast."
+                  },
+                  {
+                    "id": "apartment-eleven-p3",
+                    "text": "Joinery is built in wherever possible, keeping surfaces clear and allowing the proportions of each room to stay legible."
+                  }
+                ],
+                "caption": "ROOMS IN SEQUENCE",
+                "rows": [
+                  {
+                    "id": "apartment-eleven-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "apartment-eleven-img-1",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "apartment-eleven-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "apartment-eleven-img-2",
+                        "src": "/uploads/interior-lounge.jpg",
+                        "alt": "Lounge",
+                        "span": 1
+                      },
+                      {
+                        "id": "apartment-eleven-img-3",
+                        "src": "/uploads/interior-dining.jpg",
+                        "alt": "Dining",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "apartment-eleven-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "apartment-eleven-img-4",
+                        "src": "/uploads/interior-screen-detail.jpg",
+                        "alt": "Screen detail",
+                        "span": 1
+                      },
+                      {
+                        "id": "apartment-eleven-img-5",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "garden-duplex",
+                "title": "Garden Duplex",
+                "meta": {
+                  "area": "4,500 sq. ft",
+                  "location": "Bengaluru",
+                  "year": "2023-2024",
+                  "type": "Interior"
+                },
+                "description": [
+                  {
+                    "id": "garden-duplex-p1",
+                    "text": "The interior is planned as a sequence of connected rooms rather than a single open volume, so that each part of the home holds its own scale and character while remaining visually linked to the next."
+                  },
+                  {
+                    "id": "garden-duplex-p2",
+                    "text": "A warm, muted palette of oiled timber, raw linen and hand-finished plaster runs throughout, letting the furniture and the changing daylight provide the contrast."
+                  },
+                  {
+                    "id": "garden-duplex-p3",
+                    "text": "Joinery is built in wherever possible, keeping surfaces clear and allowing the proportions of each room to stay legible."
+                  }
+                ],
+                "caption": "LIVING WITH GREEN",
+                "rows": [
+                  {
+                    "id": "garden-duplex-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "garden-duplex-img-1",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "garden-duplex-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "garden-duplex-img-2",
+                        "src": "/uploads/interior-lounge.jpg",
+                        "alt": "Lounge",
+                        "span": 1
+                      },
+                      {
+                        "id": "garden-duplex-img-3",
+                        "src": "/uploads/interior-dining.jpg",
+                        "alt": "Dining",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "garden-duplex-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "garden-duplex-img-4",
+                        "src": "/uploads/interior-screen-detail.jpg",
+                        "alt": "Screen detail",
+                        "span": 1
+                      },
+                      {
+                        "id": "garden-duplex-img-5",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "workspace",
+            "label": "Workspace",
+            "projects": [
+              {
+                "id": "studio-floor",
+                "title": "Studio Floor",
+                "meta": {
+                  "area": "12,000 sq. ft",
+                  "location": "Mumbai",
+                  "year": "2021-2022",
+                  "type": "Interior"
+                },
+                "description": [
+                  {
+                    "id": "studio-floor-p1",
+                    "text": "The interior is planned as a sequence of connected rooms rather than a single open volume, so that each part of the home holds its own scale and character while remaining visually linked to the next."
+                  },
+                  {
+                    "id": "studio-floor-p2",
+                    "text": "A warm, muted palette of oiled timber, raw linen and hand-finished plaster runs throughout, letting the furniture and the changing daylight provide the contrast."
+                  },
+                  {
+                    "id": "studio-floor-p3",
+                    "text": "Joinery is built in wherever possible, keeping surfaces clear and allowing the proportions of each room to stay legible."
+                  }
+                ],
+                "caption": "WORKING IN THE OPEN",
+                "rows": [
+                  {
+                    "id": "studio-floor-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "studio-floor-img-1",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "studio-floor-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "studio-floor-img-2",
+                        "src": "/uploads/interior-lounge.jpg",
+                        "alt": "Lounge",
+                        "span": 1
+                      },
+                      {
+                        "id": "studio-floor-img-3",
+                        "src": "/uploads/interior-dining.jpg",
+                        "alt": "Dining",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "studio-floor-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "studio-floor-img-4",
+                        "src": "/uploads/interior-screen-detail.jpg",
+                        "alt": "Screen detail",
+                        "span": 1
+                      },
+                      {
+                        "id": "studio-floor-img-5",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "consulting-offices",
+                "title": "Consulting Offices",
+                "meta": {
+                  "area": "9,800 sq. ft",
+                  "location": "Pune",
+                  "year": "2023-2024",
+                  "type": "Interior"
+                },
+                "description": [
+                  {
+                    "id": "consulting-offices-p1",
+                    "text": "The interior is planned as a sequence of connected rooms rather than a single open volume, so that each part of the home holds its own scale and character while remaining visually linked to the next."
+                  },
+                  {
+                    "id": "consulting-offices-p2",
+                    "text": "A warm, muted palette of oiled timber, raw linen and hand-finished plaster runs throughout, letting the furniture and the changing daylight provide the contrast."
+                  },
+                  {
+                    "id": "consulting-offices-p3",
+                    "text": "Joinery is built in wherever possible, keeping surfaces clear and allowing the proportions of each room to stay legible."
+                  }
+                ],
+                "caption": "QUIET AND FOCUS",
+                "rows": [
+                  {
+                    "id": "consulting-offices-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "consulting-offices-img-1",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "consulting-offices-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "consulting-offices-img-2",
+                        "src": "/uploads/interior-lounge.jpg",
+                        "alt": "Lounge",
+                        "span": 1
+                      },
+                      {
+                        "id": "consulting-offices-img-3",
+                        "src": "/uploads/interior-dining.jpg",
+                        "alt": "Dining",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "consulting-offices-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "consulting-offices-img-4",
+                        "src": "/uploads/interior-screen-detail.jpg",
+                        "alt": "Screen detail",
+                        "span": 1
+                      },
+                      {
+                        "id": "consulting-offices-img-5",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "hospitality",
+            "label": "Hospitality",
+            "projects": [
+              {
+                "id": "harbour-restaurant",
+                "title": "Harbour Restaurant",
+                "meta": {
+                  "area": "5,600 sq. ft",
+                  "location": "Mumbai",
+                  "year": "2020-2021",
+                  "type": "Interior"
+                },
+                "description": [
+                  {
+                    "id": "harbour-restaurant-p1",
+                    "text": "The interior is planned as a sequence of connected rooms rather than a single open volume, so that each part of the home holds its own scale and character while remaining visually linked to the next."
+                  },
+                  {
+                    "id": "harbour-restaurant-p2",
+                    "text": "A warm, muted palette of oiled timber, raw linen and hand-finished plaster runs throughout, letting the furniture and the changing daylight provide the contrast."
+                  },
+                  {
+                    "id": "harbour-restaurant-p3",
+                    "text": "Joinery is built in wherever possible, keeping surfaces clear and allowing the proportions of each room to stay legible."
+                  }
+                ],
+                "caption": "TABLE AND LIGHT",
+                "rows": [
+                  {
+                    "id": "harbour-restaurant-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "harbour-restaurant-img-1",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "harbour-restaurant-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "harbour-restaurant-img-2",
+                        "src": "/uploads/interior-lounge.jpg",
+                        "alt": "Lounge",
+                        "span": 1
+                      },
+                      {
+                        "id": "harbour-restaurant-img-3",
+                        "src": "/uploads/interior-dining.jpg",
+                        "alt": "Dining",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "harbour-restaurant-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "harbour-restaurant-img-4",
+                        "src": "/uploads/interior-screen-detail.jpg",
+                        "alt": "Screen detail",
+                        "span": 1
+                      },
+                      {
+                        "id": "harbour-restaurant-img-5",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "boutique-hotel",
+                "title": "Boutique Hotel",
+                "meta": {
+                  "area": "26,000 sq. ft",
+                  "location": "Goa",
+                  "year": "2022-2025",
+                  "type": "Interior"
+                },
+                "description": [
+                  {
+                    "id": "boutique-hotel-p1",
+                    "text": "The interior is planned as a sequence of connected rooms rather than a single open volume, so that each part of the home holds its own scale and character while remaining visually linked to the next."
+                  },
+                  {
+                    "id": "boutique-hotel-p2",
+                    "text": "A warm, muted palette of oiled timber, raw linen and hand-finished plaster runs throughout, letting the furniture and the changing daylight provide the contrast."
+                  },
+                  {
+                    "id": "boutique-hotel-p3",
+                    "text": "Joinery is built in wherever possible, keeping surfaces clear and allowing the proportions of each room to stay legible."
+                  }
+                ],
+                "caption": "ARRIVAL AND REST",
+                "rows": [
+                  {
+                    "id": "boutique-hotel-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "boutique-hotel-img-1",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "boutique-hotel-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "boutique-hotel-img-2",
+                        "src": "/uploads/interior-lounge.jpg",
+                        "alt": "Lounge",
+                        "span": 1
+                      },
+                      {
+                        "id": "boutique-hotel-img-3",
+                        "src": "/uploads/interior-dining.jpg",
+                        "alt": "Dining",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "boutique-hotel-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "boutique-hotel-img-4",
+                        "src": "/uploads/interior-screen-detail.jpg",
+                        "alt": "Screen detail",
+                        "span": 1
+                      },
+                      {
+                        "id": "boutique-hotel-img-5",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "recreation",
+            "label": "Recreation",
+            "projects": [
+              {
+                "id": "members-club",
+                "title": "Members Club",
+                "meta": {
+                  "area": "15,400 sq. ft",
+                  "location": "Mumbai",
+                  "year": "2021-2023",
+                  "type": "Interior"
+                },
+                "description": [
+                  {
+                    "id": "members-club-p1",
+                    "text": "The interior is planned as a sequence of connected rooms rather than a single open volume, so that each part of the home holds its own scale and character while remaining visually linked to the next."
+                  },
+                  {
+                    "id": "members-club-p2",
+                    "text": "A warm, muted palette of oiled timber, raw linen and hand-finished plaster runs throughout, letting the furniture and the changing daylight provide the contrast."
+                  },
+                  {
+                    "id": "members-club-p3",
+                    "text": "Joinery is built in wherever possible, keeping surfaces clear and allowing the proportions of each room to stay legible."
+                  }
+                ],
+                "caption": "ROOMS TO GATHER",
+                "rows": [
+                  {
+                    "id": "members-club-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "members-club-img-1",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "members-club-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "members-club-img-2",
+                        "src": "/uploads/interior-lounge.jpg",
+                        "alt": "Lounge",
+                        "span": 1
+                      },
+                      {
+                        "id": "members-club-img-3",
+                        "src": "/uploads/interior-dining.jpg",
+                        "alt": "Dining",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "members-club-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "members-club-img-4",
+                        "src": "/uploads/interior-screen-detail.jpg",
+                        "alt": "Screen detail",
+                        "span": 1
+                      },
+                      {
+                        "id": "members-club-img-5",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "wellness-pavilion",
+                "title": "Wellness Pavilion",
+                "meta": {
+                  "area": "7,200 sq. ft",
+                  "location": "Lonavala",
+                  "year": "2023-2025",
+                  "type": "Interior"
+                },
+                "description": [
+                  {
+                    "id": "wellness-pavilion-p1",
+                    "text": "The interior is planned as a sequence of connected rooms rather than a single open volume, so that each part of the home holds its own scale and character while remaining visually linked to the next."
+                  },
+                  {
+                    "id": "wellness-pavilion-p2",
+                    "text": "A warm, muted palette of oiled timber, raw linen and hand-finished plaster runs throughout, letting the furniture and the changing daylight provide the contrast."
+                  },
+                  {
+                    "id": "wellness-pavilion-p3",
+                    "text": "Joinery is built in wherever possible, keeping surfaces clear and allowing the proportions of each room to stay legible."
+                  }
+                ],
+                "caption": "STILLNESS",
+                "rows": [
+                  {
+                    "id": "wellness-pavilion-row-1",
+                    "aspect": 1.78,
+                    "items": [
+                      {
+                        "id": "wellness-pavilion-img-1",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "wellness-pavilion-row-2",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "wellness-pavilion-img-2",
+                        "src": "/uploads/interior-lounge.jpg",
+                        "alt": "Lounge",
+                        "span": 1
+                      },
+                      {
+                        "id": "wellness-pavilion-img-3",
+                        "src": "/uploads/interior-dining.jpg",
+                        "alt": "Dining",
+                        "span": 1
+                      }
+                    ]
+                  },
+                  {
+                    "id": "wellness-pavilion-row-3",
+                    "aspect": 2.6,
+                    "items": [
+                      {
+                        "id": "wellness-pavilion-img-4",
+                        "src": "/uploads/interior-screen-detail.jpg",
+                        "alt": "Screen detail",
+                        "span": 1
+                      },
+                      {
+                        "id": "wellness-pavilion-img-5",
+                        "src": "/uploads/interior-living-room.jpg",
+                        "alt": "Living room",
+                        "span": 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "rows": [
+          {
+            "id": "interior-design-row-1",
+            "aspect": 3.1169,
+            "items": [
+              {
+                "id": "interior-1",
+                "src": "/uploads/interior-living-room.jpg",
+                "alt": "Living room",
+                "span": 1
+              },
+              {
+                "id": "interior-2",
+                "src": "/uploads/interior-lounge.jpg",
+                "alt": "Lounge",
+                "span": 1
+              },
+              {
+                "id": "interior-3",
+                "src": "/uploads/interior-dining.jpg",
+                "alt": "Dining",
+                "span": 1
+              }
+            ]
+          },
+          {
+            "id": "interior-design-row-2",
+            "aspect": 3.1169,
+            "items": [
+              {
+                "id": "interior-4",
+                "src": "/uploads/interior-screen-detail.jpg",
+                "alt": "Screen detail",
+                "span": 1
+              },
+              {
+                "id": "interior-5",
+                "src": "/uploads/interior-living-room.jpg",
+                "alt": "Living room",
+                "span": 1
+              },
+              {
+                "id": "interior-6",
+                "src": "/uploads/interior-lounge.jpg",
+                "alt": "Lounge",
+                "span": 1
+              }
+            ]
+          },
+          {
+            "id": "interior-design-row-3",
+            "aspect": 3.1169,
+            "items": [
+              {
+                "id": "interior-7",
+                "src": "/uploads/interior-dining.jpg",
+                "alt": "Dining",
+                "span": 1
+              },
+              {
+                "id": "interior-8",
+                "src": "/uploads/interior-screen-detail.jpg",
+                "alt": "Screen detail",
+                "span": 1
+              },
+              {
+                "id": "interior-9",
+                "src": "/uploads/interior-living-room.jpg",
+                "alt": "Living room",
+                "span": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "intro": "We would be glad to hear about your project.",
+    "details": [
+      {
+        "id": "email",
+        "label": "Email",
+        "value": "studio@hsarchitects.in",
+        "type": "email"
+      },
+      {
+        "id": "phone",
+        "label": "Phone",
+        "value": "+91 00000 00000",
+        "type": "phone"
+      },
+      {
+        "id": "studio",
+        "label": "Studio",
+        "value": "Address line one\nAddress line two\nCity 000000",
+        "type": "text"
+      }
+    ]
+  }
+}
