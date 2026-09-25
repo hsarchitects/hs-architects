@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { useEditMode } from "./EditModeContext";
 
@@ -192,10 +193,17 @@ function EditImageModal({
     }
   }
 
-  return (
+  // Portaled to <body>: a tile ancestor with a CSS filter/transform (e.g. the
+  // project grid's grayscale) would otherwise trap `fixed` inside the tile.
+  // React events still bubble through the portal, so stop them reaching a
+  // clickable tile underneath.
+  return createPortal(
     <div
       className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 p-4"
-      onClick={onClose}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClose();
+      }}
     >
       <div
         className="w-full max-w-md bg-white p-6 shadow-xl"
@@ -279,6 +287,7 @@ function EditImageModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
