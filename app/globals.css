@@ -122,11 +122,12 @@ body {
 }
 
 .office-map {
-  background: #000;
+  /* The sea tone — see SEA_TONE in OfficeMap.tsx. */
+  background: #2e2e2e;
 }
 
 .office-map .leaflet-container {
-  background: #000;
+  background: #2e2e2e;
   font-family: inherit;
 }
 

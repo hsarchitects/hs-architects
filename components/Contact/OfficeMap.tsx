@@ -37,20 +37,23 @@ const TILE_URL =
  * (0-255) to output (0-1).
  *
  * The tiles draw water at ~35, land at ~71 and roads at ~88-111. Those three
- * need to land on black, dark grey and white respectively — which is not a
- * straight line, so CSS brightness/contrast can't express it: any linear ramp
- * steep enough to separate the roads from the land also crushes the land into
- * the water and loses the coastline. An SVG feComponentTransfer table can
- * bend wherever we like, so the water flattens to black while the land keeps
- * just enough lift to read as a distinct silhouette against it.
+ * need to land on dark grey, black and white respectively — the darkest
+ * input becomes a light tone and the middle one the darkest, which no CSS
+ * brightness/contrast/invert can express. An SVG feComponentTransfer table
+ * can bend wherever we like, so the water lifts to a flat dark grey, the
+ * land drops to black, and the roads still climb out of it to white.
+ *
+ * SEA_TONE is repeated as the map's background colour in globals.css
+ * (0.18 = #2e2e2e), so the square is already sea-coloured while tiles load.
  */
+const SEA_TONE = 0.18;
+
 const TONE_CURVE: readonly (readonly [number, number])[] = [
-  [0, 0],
-  [44, 0], // water — flat black
-  [56, 0.03],
-  [66, 0.075],
-  [74, 0.09], // land — dark, but clearly not the sea
-  [82, 0.13],
+  [0, SEA_TONE],
+  [44, SEA_TONE], // water — flat dark grey
+  [60, 0], // the coastline falls away to the land tone
+  [78, 0], // land — black
+  [84, 0.13],
   [90, 0.5], // minor roads climb away from the land tone
   [98, 0.8],
   [106, 1], // major roads — white
@@ -178,7 +181,7 @@ export function OfficeMap() {
         ref={containerRef}
         role="application"
         aria-label="Map of the studio's location"
-        className="office-map aspect-square w-full bg-black"
+        className="office-map aspect-square w-full"
       />
 
       <figcaption className="mt-2 text-[0.65rem] text-stone-400">
