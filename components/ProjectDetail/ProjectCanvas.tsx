@@ -1,9 +1,16 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { EditableImage } from "@/components/Admin/EditableImage";
 import { useEditMode } from "@/components/Admin/EditModeContext";
 import type { ProjectImage, ProjectImageRow } from "@/lib/content";
+
+/** What the image modal hands back. */
+type ImageEdit = Pick<ProjectImage, "src" | "alt" | "categoryId">;
+
+/** A project type a tile can point at; `href` is null while it has no projects. */
+export type CanvasCategory = { id: string; label: string; href: string | null };
 
 type ProjectCanvasProps = {
   rows: ProjectImageRow[];
@@ -30,8 +37,13 @@ type ProjectCanvasProps = {
   allowAddRows?: boolean;
   /** Images per row. The /projects grid stays three across. */
   maxItemsPerRow?: number;
-  /** Public-page click-to-enlarge, used by the /projects grid. */
+  /** Public-page hover-to-enlarge, used by the /projects grid. */
   expandable?: boolean;
+  /**
+   * The project types a tile can be linked to, used by the /projects grid.
+   * The admin picks one per image; on the public page the tile then opens it.
+   */
+  categories?: CanvasCategory[];
 };
 
 const DEFAULT_MAX_ITEMS_PER_ROW = 4;
@@ -104,11 +116,12 @@ export function ProjectCanvas({
   allowAddRows = true,
   maxItemsPerRow = DEFAULT_MAX_ITEMS_PER_ROW,
   expandable = false,
+  categories,
 }: ProjectCanvasProps) {
   const { isEditMode, showToast } = useEditMode();
   const isEditable = isEditMode && !!onRowsChange;
-  // Enlarging and editing would fight over the same click, so the public
-  // page expands and the admin edits.
+  // Enlarging would cover the tiles the admin is trying to edit, so the
+  // public page expands and the admin edits.
   const canExpand = expandable && !isEditable;
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
@@ -166,7 +179,7 @@ export function ProjectCanvas({
   );
 
   const handleImageSave = useCallback(
-    (rowId: string, imageId: string, next: { src: string; alt: string }) =>
+    (rowId: string, imageId: string, next: ImageEdit) =>
       replaceRow(
         rowId,
         (row) => ({
@@ -197,9 +210,14 @@ export function ProjectCanvas({
           rowIndex={rowIndex}
           rowCount={rows.length}
           canExpand={canExpand}
+          categories={categories}
           expandedId={expandedId}
-          onToggleExpand={(id) =>
-            setExpandedId((current) => (current === id ? null : id))
+          // Closing only clears the tile that asked, so a late leave from one
+          // tile can't shut the one the pointer has already moved onto.
+          onExpandChange={(id, open) =>
+            setExpandedId((current) =>
+              open ? id : current === id ? null : current
+            )
           }
           isAnyExpanded={!!expandedId}
           isFirst={rowIndex === 0}
@@ -268,8 +286,9 @@ function CanvasRow({
   rowIndex,
   rowCount,
   canExpand,
+  categories,
   expandedId,
-  onToggleExpand,
+  onExpandChange,
   isAnyExpanded,
   isFirst,
   isLast,
@@ -290,14 +309,15 @@ function CanvasRow({
   rowIndex: number;
   rowCount: number;
   canExpand: boolean;
+  categories?: CanvasCategory[];
   expandedId: string | null;
-  onToggleExpand: (id: string) => void;
+  onExpandChange: (id: string, open: boolean) => void;
   isAnyExpanded: boolean;
   isFirst: boolean;
   isLast: boolean;
   onImageSave: (
     imageId: string,
-    next: { src: string; alt: string }
+    next: ImageEdit
   ) => Promise<void> | void;
   onSpansChange: (spans: number[]) => void;
   onAspectChange: (aspect: number) => void;
@@ -442,7 +462,10 @@ function CanvasRow({
               rowIndex={rowIndex}
               rowCount={rowCount}
               alt={item.alt}
-              onToggle={() => onToggleExpand(item.id)}
+              link={categories?.find(
+                (category) => category.id === item.categoryId
+              )}
+              onExpandChange={(open) => onExpandChange(item.id, open)}
             >
               {item.src ? (
                 <EditableImage
@@ -453,12 +476,17 @@ function CanvasRow({
                   altLabel="Alt text"
                   wrapperClassName="absolute inset-0"
                   imageClassName="object-cover"
+                  categoryOptions={categories}
+                  categoryId={item.categoryId}
                   onSave={(next) => onImageSave(item.id, next)}
                 />
               ) : isEditable ? (
                 // A placeholder slot: EditableImage needs a real src, so this
                 // stands in until one is chosen.
-                <EmptySlot onSave={(next) => onImageSave(item.id, next)} />
+                <EmptySlot
+                  categoryOptions={categories}
+                  onSave={(next) => onImageSave(item.id, next)}
+                />
               ) : null}
             </TileFrame>
 
@@ -520,7 +548,8 @@ function TileFrame({
   rowIndex,
   rowCount,
   alt,
-  onToggle,
+  link,
+  onExpandChange,
   children,
 }: {
   isExpanded: boolean;
@@ -531,7 +560,9 @@ function TileFrame({
   rowIndex: number;
   rowCount: number;
   alt: string;
-  onToggle: () => void;
+  /** The project type this tile opens, if the admin has picked one. */
+  link?: CanvasCategory;
+  onExpandChange: (open: boolean) => void;
   children: React.ReactNode;
 }) {
   const gap = "var(--row-gap, 0.375rem)";
@@ -567,15 +598,28 @@ function TileFrame({
     );
   }
 
+  // Focusable so the keyboard can reach it: focus enlarges, as hover does.
+  // A tap on a touch screen arrives as a mouseenter, so it works too.
+  const hover = {
+    onMouseEnter: () => onExpandChange(true),
+    onMouseLeave: () => onExpandChange(false),
+    onFocus: () => onExpandChange(true),
+    onBlur: () => onExpandChange(false),
+    className,
+    style,
+  };
+
+  // A tile with a project type opens that type's first project.
+  if (link?.href) {
+    return (
+      <Link href={link.href} aria-label={alt || link.label} {...hover}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <button
-      type="button"
-      aria-expanded={isExpanded}
-      aria-label={isExpanded ? `Shrink ${alt}` : `Enlarge ${alt}`}
-      onClick={onToggle}
-      className={`${className} cursor-pointer`}
-      style={style}
-    >
+    <button type="button" aria-expanded={isExpanded} aria-label={alt} {...hover}>
       {children}
     </button>
   );
@@ -583,9 +627,11 @@ function TileFrame({
 
 /** Empty image slot shown in the admin until a file or URL is chosen. */
 function EmptySlot({
+  categoryOptions,
   onSave,
 }: {
-  onSave: (next: { src: string; alt: string }) => Promise<void> | void;
+  categoryOptions?: CanvasCategory[];
+  onSave: (next: ImageEdit) => Promise<void> | void;
 }) {
   return (
     <div className="absolute inset-0">
@@ -597,6 +643,7 @@ function EmptySlot({
         altLabel="Alt text"
         wrapperClassName="absolute inset-0 opacity-25"
         imageClassName="object-contain p-6"
+        categoryOptions={categoryOptions}
         onSave={onSave}
       />
       <p className="pointer-events-none absolute inset-x-0 bottom-3 text-center text-[0.65rem] tracking-wide text-stone-500">

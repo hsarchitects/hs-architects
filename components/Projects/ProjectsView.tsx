@@ -161,6 +161,14 @@ export function ProjectsView({
               allowAddRows={false}
               maxItemsPerRow={3}
               expandable
+              categories={section.links.map((link) => {
+                const first = firstProjectOfCategory(link);
+                return {
+                  id: link.id,
+                  label: link.label,
+                  href: first ? projectHref(link.id, first.id) : null,
+                };
+              })}
             />
           </div>
 

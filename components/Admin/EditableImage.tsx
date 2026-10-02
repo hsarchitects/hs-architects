@@ -5,7 +5,9 @@ import { createPortal } from "react-dom";
 import Image, { type ImageLoaderProps } from "next/image";
 import { useEditMode } from "./EditModeContext";
 
-type SaveArgs = { src: string; alt: string };
+type SaveArgs = { src: string; alt: string; categoryId?: string };
+
+type CategoryOption = { id: string; label: string };
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 const MAX_FILE_SIZE = 8 * 1024 * 1024; // 8MB
@@ -30,6 +32,12 @@ type EditableImageProps = {
   sizes?: string;
   imageClassName?: string;
   wrapperClassName?: string;
+  /**
+   * When given, the modal also offers a "Project type" picker and the save
+   * carries the chosen `categoryId` (undefined for "Unselected").
+   */
+  categoryOptions?: CategoryOption[];
+  categoryId?: string;
 } & (
   | { fill: true; width?: undefined; height?: undefined; priority?: boolean }
   | { fill?: false; width: number; height: number; priority?: boolean }
@@ -68,6 +76,8 @@ export function EditableImage({
   sizes,
   imageClassName,
   wrapperClassName,
+  categoryOptions,
+  categoryId,
   fill,
   width,
   height,
@@ -143,6 +153,8 @@ export function EditableImage({
           currentSrc={src}
           currentAlt={alt}
           altLabel={altLabel}
+          categoryOptions={categoryOptions}
+          currentCategoryId={categoryId}
           onClose={() => setIsModalOpen(false)}
           onSave={async (next) => {
             try {
@@ -166,12 +178,16 @@ function EditImageModal({
   currentSrc,
   currentAlt,
   altLabel,
+  categoryOptions,
+  currentCategoryId,
   onClose,
   onSave,
 }: {
   currentSrc: string;
   currentAlt: string;
   altLabel: string;
+  categoryOptions?: CategoryOption[];
+  currentCategoryId?: string;
   onClose: () => void;
   onSave: (next: SaveArgs) => Promise<void>;
 }) {
@@ -179,6 +195,10 @@ function EditImageModal({
   const [file, setFile] = useState<File | null>(null);
   const [urlInput, setUrlInput] = useState("");
   const [altInput, setAltInput] = useState(currentAlt);
+  // A type that has since been deleted falls back to "Unselected".
+  const [categoryInput, setCategoryInput] = useState(
+    categoryOptions?.find((option) => option.id === currentCategoryId)?.id ?? ""
+  );
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -227,7 +247,11 @@ function EditImageModal({
         nextSrc = urlInput.trim();
       }
 
-      await onSave({ src: nextSrc, alt: altInput.trim() });
+      await onSave({
+        src: nextSrc,
+        alt: altInput.trim(),
+        ...(categoryOptions && { categoryId: categoryInput || undefined }),
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Couldn't save. Try again.");
     } finally {
@@ -296,6 +320,26 @@ function EditImageModal({
             className="w-full border border-stone-300 px-3 py-2 text-sm text-stone-900 outline-none focus:border-stone-500"
           />
         </div>
+
+        {categoryOptions && (
+          <div className="mb-4">
+            <label className="mb-1.5 block text-sm text-stone-600">
+              Project type — where a click on this image goes
+            </label>
+            <select
+              value={categoryInput}
+              onChange={(e) => setCategoryInput(e.target.value)}
+              className="w-full border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 outline-none focus:border-stone-500"
+            >
+              <option value="">Unselected</option>
+              {categoryOptions.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
         <div className="mb-5">
           <label className="mb-1.5 block text-sm text-stone-600">

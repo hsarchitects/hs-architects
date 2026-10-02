@@ -67,6 +67,11 @@ export type ProjectImage = {
   src: string;
   alt: string;
   span: number;
+  /**
+   * The project type (a `ProjectLink` id) this tile opens on the /projects
+   * grid. Absent means "Unselected" — the tile isn't a link.
+   */
+  categoryId?: string;
 };
 
 /**
@@ -244,7 +249,10 @@ function isProjectImageRow(value: unknown): value is ProjectImageRow {
         isGalleryImage(item) &&
         typeof (item as ProjectImage).span === "number" &&
         Number.isFinite((item as ProjectImage).span) &&
-        (item as ProjectImage).span > 0
+        (item as ProjectImage).span > 0 &&
+        ["undefined", "string"].includes(
+          typeof (item as ProjectImage).categoryId
+        )
     )
   );
 }
