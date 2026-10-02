@@ -18,6 +18,8 @@ type ProjectsProps = {
     rows: ProjectImageRow[]
   ) => Promise<void> | void;
   onAddProject?: (sectionId: string, linkId: string) => Promise<void> | void;
+  onAddCategory?: (sectionId: string) => Promise<void> | void;
+  onDeleteCategory?: (sectionId: string, linkId: string) => Promise<void> | void;
 };
 
 /**
@@ -31,6 +33,8 @@ export function Projects({
   onLinkChange,
   onSectionRowsChange,
   onAddProject,
+  onAddCategory,
+  onDeleteCategory,
 }: ProjectsProps) {
   return (
     <div className="min-h-screen bg-white">
@@ -45,6 +49,8 @@ export function Projects({
         onLinkChange={onLinkChange}
         onRowsChange={onSectionRowsChange}
         onAddProject={onAddProject}
+        onAddCategory={onAddCategory}
+        onDeleteCategory={onDeleteCategory}
       />
     </div>
   );

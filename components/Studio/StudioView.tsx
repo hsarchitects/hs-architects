@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { EditableImage } from "@/components/Admin/EditableImage";
 import { EditableText } from "@/components/Admin/EditableText";
+import { useEditMode } from "@/components/Admin/EditModeContext";
 import type { StudioContent } from "@/lib/content";
 
 type StudioViewProps = {
@@ -22,10 +23,14 @@ type Block =
   | { kind: "intro"; id: string; text: string }
   | { kind: "principle"; id: string; heading: string; text: string };
 
+/** How long each photo is shown before crossfading to the next. */
+const SLIDE_INTERVAL_MS = 5000;
+
 /**
  * The pinned photo + scrolling copy on /studio. The copy scrolls normally
- * while the photo stays pinned; whichever block is nearest the centre of the
- * viewport picks which of the photos is shown, cycling in order.
+ * while the photo stays pinned and crossfades through the studio photos on a
+ * timer, in order, looping. Visitors who ask for reduced motion get the first
+ * photo, still.
  *
  * The photo pins flush beneath the sticky navbar, and both are opaque, so
  * copy that scrolls up behind the photo stays hidden rather than re-emerging
@@ -47,36 +52,38 @@ export function StudioView({
     })),
   ];
 
-  const [activeIndex, setActiveIndex] = useState(0);
-  const blockRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const { isEditMode } = useEditMode();
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  // While editing, the slideshow holds still under the pointer so the admin
+  // can click the photo they mean to replace.
+  const isPaused = useRef(false);
+  const imageCount = studio.images.length;
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            const index = blockRefs.current.findIndex((el) => el === entry.target);
-            if (index !== -1) setActiveIndex(index);
-          }
-        }
-      },
-      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
-    );
+    if (imageCount < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const currentRefs = blockRefs.current;
-    currentRefs.forEach((el) => el && observer.observe(el));
-    return () => observer.disconnect();
-  }, [blocks.length]);
-
-  const activeImageIndex = studio.images.length
-    ? activeIndex % studio.images.length
-    : 0;
+    const timer = setInterval(() => {
+      if (!isPaused.current) {
+        setActiveImageIndex((index) => (index + 1) % imageCount);
+      }
+    }, SLIDE_INTERVAL_MS);
+    return () => clearInterval(timer);
+  }, [imageCount]);
 
   return (
     <section className="isolate mx-auto max-w-xl px-6 pb-32">
       {/* Pins flush under the navbar — offsets mirror the Header's height. */}
       <div className="sticky top-26 z-20 bg-white sm:top-28">
-        <div className="relative aspect-4/3 w-full overflow-hidden bg-stone-200">
+        <div
+          className="relative aspect-4/3 w-full overflow-hidden bg-stone-200"
+          onMouseEnter={() => {
+            isPaused.current = isEditMode;
+          }}
+          onMouseLeave={() => {
+            isPaused.current = false;
+          }}
+        >
           {studio.images.map((image, index) => (
             <EditableImage
               key={image.id}
@@ -102,13 +109,8 @@ export function StudioView({
       </div>
 
       <div className="relative z-0 mt-20 space-y-12">
-        {blocks.map((block, index) => (
-          <div
-            key={block.id}
-            ref={(el) => {
-              blockRefs.current[index] = el;
-            }}
-          >
+        {blocks.map((block) => (
+          <div key={block.id}>
             {block.kind === "intro" ? (
               <EditableText
                 value={block.text}

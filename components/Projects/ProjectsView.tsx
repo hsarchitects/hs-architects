@@ -24,7 +24,13 @@ type ProjectsViewProps = {
     rows: ProjectImageRow[],
   ) => Promise<void> | void;
   onAddProject?: (sectionId: string, linkId: string) => Promise<void> | void;
+  onAddCategory?: (sectionId: string) => Promise<void> | void;
+  onDeleteCategory?: (sectionId: string, linkId: string) => Promise<void> | void;
 };
+
+/** The small bordered control the admin-only list buttons share. */
+const ADMIN_BUTTON =
+  "border border-stone-300 bg-white px-1.5 py-1 text-[0.65rem] font-medium text-stone-600 transition-colors hover:border-stone-500 hover:text-stone-900";
 
 /**
  * One centred grid of project thumbnails per discipline, with the discipline
@@ -40,6 +46,8 @@ export function ProjectsView({
   onLinkChange,
   onRowsChange,
   onAddProject,
+  onAddCategory,
+  onDeleteCategory,
 }: ProjectsViewProps) {
   const { isEditMode } = useEditMode();
 
@@ -104,14 +112,40 @@ export function ProjectsView({
                         type="button"
                         onClick={() => onAddProject(section.id, link.id)}
                         title="Add the first project to this category"
-                        className="border border-stone-300 bg-white px-1.5 py-1 text-[0.65rem] font-medium text-stone-600 transition-colors hover:border-stone-500 hover:text-stone-900"
+                        className={ADMIN_BUTTON}
                       >
                         + Project
+                      </button>
+                    )}
+
+                    {onDeleteCategory && (
+                      <button
+                        type="button"
+                        onClick={() => onDeleteCategory(section.id, link.id)}
+                        title={`Delete ${link.label}`}
+                        aria-label={`Delete ${link.label}`}
+                        className={ADMIN_BUTTON}
+                      >
+                        ✕
                       </button>
                     )}
                   </div>
                 );
               })}
+
+              {/* Admin only: adds another project type to this discipline. */}
+              {onAddCategory && (
+                <div className="flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => onAddCategory(section.id)}
+                    title={`Add a project type to ${section.heading}`}
+                    className={ADMIN_BUTTON}
+                  >
+                    + Project type
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 

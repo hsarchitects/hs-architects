@@ -101,6 +101,70 @@ function AdminProjectsEditorInner({ initialContent }: { initialContent: SiteCont
     router.refresh();
   }
 
+  /** Runs a list change and reports it, since these have no editor of their own to do so. */
+  async function saveSection(
+    sectionId: string,
+    change: (section: ProjectSection) => ProjectSection
+  ) {
+    try {
+      await updateSection(sectionId, change);
+      showToast("Saved");
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : "Save failed", "error");
+    }
+  }
+
+  /**
+   * Adds a project type to a discipline. Its id — the /projects/<id>/…
+   * segment — is taken from the name here and never changes afterwards, so
+   * renaming a type later doesn't break links to its projects.
+   */
+  function handleAddCategory(sectionId: string) {
+    const label = window.prompt("Name of the new project type")?.trim();
+    if (!label) return;
+
+    // Ids are looked up across every discipline, so they must be unique site-wide.
+    const taken = new Set(
+      content.projects.sections.flatMap((section) =>
+        section.links.map((link) => link.id)
+      )
+    );
+    const slug =
+      label
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "") || "type";
+    let id = slug;
+    for (let n = 2; taken.has(id); n += 1) id = `${slug}-${n}`;
+
+    return saveSection(sectionId, (section) => ({
+      ...section,
+      links: [...section.links, { id, label, projects: [] }],
+    }));
+  }
+
+  function handleDeleteCategory(sectionId: string, linkId: string) {
+    const link = content.projects.sections
+      .find((section) => section.id === sectionId)
+      ?.links.find((candidate) => candidate.id === linkId);
+    if (!link) return;
+
+    const count = link.projects.length;
+    const contents =
+      count === 0
+        ? ""
+        : ` and the ${count} project${count === 1 ? "" : "s"} inside it`;
+    const confirmed = window.confirm(
+      `Delete “${link.label}”${contents}? This can't be undone.`
+    );
+    if (!confirmed) return;
+
+    return saveSection(sectionId, (section) => ({
+      ...section,
+      links: section.links.filter((candidate) => candidate.id !== linkId),
+    }));
+  }
+
   async function handleLogout() {
     setIsLoggingOut(true);
     try {
@@ -120,6 +184,8 @@ function AdminProjectsEditorInner({ initialContent }: { initialContent: SiteCont
         onLinkChange={handleLinkChange}
         onSectionRowsChange={handleSectionRowsChange}
         onAddProject={handleAddProject}
+        onAddCategory={handleAddCategory}
+        onDeleteCategory={handleDeleteCategory}
       />
 
       <div className="fixed bottom-6 right-6 z-90 flex gap-2">
