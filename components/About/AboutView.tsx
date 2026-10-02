@@ -129,6 +129,7 @@ function Person({
             alt={person.image.alt}
             fill
             sizes="(min-width: 1024px) 24rem, 100vw"
+            priority
             altLabel="Alt text"
             wrapperClassName="absolute inset-0"
             imageClassName="object-cover"

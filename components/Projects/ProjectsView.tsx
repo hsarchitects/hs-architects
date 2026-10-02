@@ -23,6 +23,7 @@ type ProjectsViewProps = {
     sectionId: string,
     rows: ProjectImageRow[],
   ) => Promise<void> | void;
+  onAddProject?: (sectionId: string, linkId: string) => Promise<void> | void;
 };
 
 /**
@@ -38,6 +39,7 @@ export function ProjectsView({
   onHeadingChange,
   onLinkChange,
   onRowsChange,
+  onAddProject,
 }: ProjectsViewProps) {
   const { isEditMode } = useEditMode();
 
@@ -94,6 +96,19 @@ export function ProjectsView({
                         onLinkChange?.(section.id, link.id, next)
                       }
                     />
+
+                    {/* Admin only: an empty category has no project page to
+                        add one from, so its first project starts here. */}
+                    {!href && onAddProject && (
+                      <button
+                        type="button"
+                        onClick={() => onAddProject(section.id, link.id)}
+                        title="Add the first project to this category"
+                        className="border border-stone-300 bg-white px-1.5 py-1 text-[0.65rem] font-medium text-stone-600 transition-colors hover:border-stone-500 hover:text-stone-900"
+                      >
+                        + Project
+                      </button>
+                    )}
                   </div>
                 );
               })}

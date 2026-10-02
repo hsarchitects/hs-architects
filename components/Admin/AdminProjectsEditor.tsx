@@ -3,12 +3,16 @@
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Projects } from "@/components/Projects/Projects";
+import { blankProject } from "./AdminProjectDetailEditor";
+import { useEditMode } from "./EditModeContext";
 import { EditModeProvider } from "./EditModeProvider";
 import { persistContent } from "./persistContent";
 import type { ProjectImageRow, ProjectSection, SiteContent } from "@/lib/content";
+import { adminProjectHref } from "@/lib/projects";
 
 function AdminProjectsEditorInner({ initialContent }: { initialContent: SiteContent }) {
   const router = useRouter();
+  const { showToast } = useEditMode();
   const [content, setContent] = useState(initialContent);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
@@ -74,6 +78,29 @@ function AdminProjectsEditorInner({ initialContent }: { initialContent: SiteCont
     [updateSection]
   );
 
+  /**
+   * Starts the first project of an empty category and opens it. Without this
+   * a category whose last project was deleted has no page to add one from.
+   */
+  async function handleAddProject(sectionId: string, linkId: string) {
+    const created = blankProject(0);
+    try {
+      await updateSection(sectionId, (section) => ({
+        ...section,
+        links: section.links.map((link) =>
+          link.id === linkId
+            ? { ...link, projects: [...link.projects, created] }
+            : link
+        ),
+      }));
+    } catch (err) {
+      showToast(err instanceof Error ? err.message : "Save failed", "error");
+      return;
+    }
+    router.push(adminProjectHref(linkId, created.id));
+    router.refresh();
+  }
+
   async function handleLogout() {
     setIsLoggingOut(true);
     try {
@@ -92,6 +119,7 @@ function AdminProjectsEditorInner({ initialContent }: { initialContent: SiteCont
         onHeadingChange={handleHeadingChange}
         onLinkChange={handleLinkChange}
         onSectionRowsChange={handleSectionRowsChange}
+        onAddProject={handleAddProject}
       />
 
       <div className="fixed bottom-6 right-6 z-90 flex gap-2">

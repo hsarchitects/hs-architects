@@ -3,10 +3,11 @@
  * One-off helper to generate the bcrypt hash for ADMIN_PASSWORD_HASH.
  *
  * Usage:
- *   node scripts/hash-password.mjs "your-password-here"
+ *   node scripts/hash-password.mjs 'your-password-here'
  *
- * Copy the printed hash into .env.local — never commit the plaintext
- * password anywhere.
+ * Use single quotes, so the shell doesn't rewrite a `$` or `!` in the
+ * password. Paste the printed line into .env.local as-is — never commit the
+ * plaintext password anywhere.
  */
 import bcrypt from "bcryptjs";
 
@@ -18,4 +19,6 @@ if (!password) {
 }
 
 const hash = await bcrypt.hash(password, 12);
-console.log(hash);
+// Next.js treats `$name` in an env file as a variable to substitute, which
+// would mangle the hash — so the `$` signs are printed already escaped.
+console.log(`ADMIN_PASSWORD_HASH=${hash.replaceAll("$", "\\$")}`);

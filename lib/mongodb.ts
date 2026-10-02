@@ -9,8 +9,9 @@ import { MongoClient, type Db } from "mongodb";
  * MONGODB_URI) during the build would break `next build` on a machine that
  * has no database credentials.
  *
- * In development the promise is cached on `globalThis` so Hot Module Reload
- * doesn't open a new connection pool on every edit.
+ * The promise is cached on `globalThis` so Hot Module Reload doesn't open a
+ * new connection pool on every edit. A failed connection is dropped from the
+ * cache, so the next request retries instead of failing until a restart.
  */
 
 const DEFAULT_DB_NAME = "hs_architects";
@@ -30,17 +31,12 @@ function connect(): Promise<MongoClient> {
 }
 
 export function getMongoClient(): Promise<MongoClient> {
-  if (process.env.NODE_ENV === "development") {
-    global.__hsMongoClient ??= connect();
-    return global.__hsMongoClient;
-  }
-  // In production the module is evaluated once, so a module-level cache is
-  // enough — and each serverless instance keeps its own warm pool.
-  productionClient ??= connect();
-  return productionClient;
+  global.__hsMongoClient ??= connect().catch((error) => {
+    global.__hsMongoClient = undefined;
+    throw error;
+  });
+  return global.__hsMongoClient;
 }
-
-let productionClient: Promise<MongoClient> | undefined;
 
 export async function getDb(): Promise<Db> {
   const client = await getMongoClient();

@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { getDb } from "./mongodb";
 
 export type GalleryImage = {
@@ -129,6 +130,13 @@ export type ContactContent = {
 };
 
 export type SiteContent = {
+  /**
+   * Bumped on every save. A save names the version it was made from, so one
+   * made from a stale copy (another tab, another admin) is refused rather
+   * than silently overwriting the newer edits. Absent on content seeded
+   * before versioning, which counts as 0.
+   */
+  version?: number;
   header: {
     logoSrc: string;
     logoText: string;
@@ -157,7 +165,18 @@ export const CONTENT_DOC_ID = "site";
 
 type ContentDocument = { _id: string; content: SiteContent };
 
-export async function readSiteContent(): Promise<SiteContent> {
+/** Thrown when a save was made from a copy older than what's stored. */
+export class ContentConflictError extends Error {
+  constructor() {
+    super(
+      "This content was changed somewhere else. Reload the page to get the latest version, then edit again."
+    );
+  }
+}
+
+// `cache` dedupes the read within one request — a page and its
+// generateMetadata share a single query.
+export const readSiteContent = cache(async (): Promise<SiteContent> => {
   const db = await getDb();
   const document = await db
     .collection<ContentDocument>(CONTENT_COLLECTION)
@@ -171,18 +190,28 @@ export async function readSiteContent(): Promise<SiteContent> {
   }
 
   return document.content;
-}
+});
 
-export async function writeSiteContent(content: SiteContent): Promise<void> {
+/** Saves the content and resolves to its new version. */
+export async function writeSiteContent(content: SiteContent): Promise<number> {
   assertValidSiteContent(content);
+  const base = content.version ?? 0;
+  const version = base + 1;
   const db = await getDb();
-  await db
+  const result = await db
     .collection<ContentDocument>(CONTENT_COLLECTION)
     .updateOne(
-      { _id: CONTENT_DOC_ID },
-      { $set: { content }, $currentDate: { updatedAt: true } },
-      { upsert: true }
+      {
+        _id: CONTENT_DOC_ID,
+        // Only matches if nobody has saved since this copy was read. `null`
+        // also matches a missing field, i.e. never-versioned content.
+        "content.version": base === 0 ? { $in: [0, null] } : base,
+      },
+      { $set: { content: { ...content, version } }, $currentDate: { updatedAt: true } }
     );
+
+  if (result.matchedCount === 0) throw new ContentConflictError();
+  return version;
 }
 
 function isGalleryImage(value: unknown): value is GalleryImage {
@@ -245,6 +274,13 @@ function assertValidSiteContent(value: unknown): asserts value is SiteContent {
     throw new Error("Content must be an object");
   }
   const content = value as Partial<SiteContent>;
+
+  if (
+    content.version !== undefined &&
+    !(Number.isInteger(content.version) && content.version >= 0)
+  ) {
+    throw new Error("Content has an invalid version");
+  }
 
   if (
     !content.header ||

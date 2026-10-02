@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeSiteContent, type SiteContent } from "@/lib/content";
+import { getSession } from "@/lib/auth";
+import {
+  ContentConflictError,
+  writeSiteContent,
+  type SiteContent,
+} from "@/lib/content";
 
-// Protected by proxy.ts (matcher includes /api/content/update) — requires a
-// valid admin session cookie.
+// proxy.ts already guards this path; the session is checked again here so a
+// change to the proxy matcher can't quietly leave writes open.
 export async function PATCH(request: NextRequest) {
+  if (!(await getSession())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   let body: SiteContent;
   try {
     body = await request.json();
@@ -12,11 +21,13 @@ export async function PATCH(request: NextRequest) {
   }
 
   try {
-    await writeSiteContent(body);
+    const version = await writeSiteContent(body);
+    return NextResponse.json({ ok: true, version });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Invalid content";
-    return NextResponse.json({ error: message }, { status: 400 });
+    return NextResponse.json(
+      { error: message },
+      { status: error instanceof ContentConflictError ? 409 : 400 }
+    );
   }
-
-  return NextResponse.json({ ok: true });
 }

@@ -17,6 +17,7 @@ type ProjectsProps = {
     sectionId: string,
     rows: ProjectImageRow[]
   ) => Promise<void> | void;
+  onAddProject?: (sectionId: string, linkId: string) => Promise<void> | void;
 };
 
 /**
@@ -29,6 +30,7 @@ export function Projects({
   onHeadingChange,
   onLinkChange,
   onSectionRowsChange,
+  onAddProject,
 }: ProjectsProps) {
   return (
     <div className="min-h-screen bg-white">
@@ -42,6 +44,7 @@ export function Projects({
         onHeadingChange={onHeadingChange}
         onLinkChange={onLinkChange}
         onRowsChange={onSectionRowsChange}
+        onAddProject={onAddProject}
       />
     </div>
   );

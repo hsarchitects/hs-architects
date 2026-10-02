@@ -21,7 +21,7 @@ type AdminProjectDetailEditorProps = {
 };
 
 /** A brand-new project starts with one empty image row for the admin to fill. */
-function blankProject(index: number): ProjectDetail {
+export function blankProject(index: number): ProjectDetail {
   const suffix = Math.random().toString(36).slice(2, 7);
   const id = `project-${suffix}`;
   return {

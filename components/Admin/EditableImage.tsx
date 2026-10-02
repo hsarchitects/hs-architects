@@ -2,10 +2,25 @@
 
 import { useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import Image from "next/image";
+import Image, { type ImageLoaderProps } from "next/image";
 import { useEditMode } from "./EditModeContext";
 
 type SaveArgs = { src: string; alt: string };
+
+const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+const MAX_FILE_SIZE = 8 * 1024 * 1024; // 8MB
+
+/**
+ * Uploaded images are stored at full resolution. This asks Cloudinary for a
+ * copy no wider than the slot it's shown in, in the best format the browser
+ * accepts — the same picture at a fraction of the download.
+ */
+function cloudinaryLoader({ src, width, quality }: ImageLoaderProps) {
+  return src.replace(
+    "/image/upload/",
+    `/image/upload/f_auto,q_${quality ?? "auto"},c_limit,w_${width}/`
+  );
+}
 
 type EditableImageProps = {
   src: string;
@@ -65,6 +80,10 @@ export function EditableImage({
   // Pasted URLs can point anywhere, so skip Next's image optimizer for them
   // rather than requiring every possible host to be allowlisted up front.
   const isExternal = /^https?:\/\//.test(src);
+  const isCloudinary =
+    isExternal && src.includes("res.cloudinary.com/") && src.includes("/image/upload/");
+  const loader = isCloudinary ? cloudinaryLoader : undefined;
+  const unoptimized = isExternal && !isCloudinary;
 
   const image = hasError ? (
     <BrokenImageFallback />
@@ -74,8 +93,9 @@ export function EditableImage({
       alt={alt}
       fill
       sizes={sizes}
-      priority={priority}
-      unoptimized={isExternal}
+      loading={priority ? "eager" : undefined}
+      loader={loader}
+      unoptimized={unoptimized}
       className={imageClassName}
       onError={() => setHasError(true)}
     />
@@ -85,8 +105,9 @@ export function EditableImage({
       alt={alt}
       width={width}
       height={height}
-      priority={priority}
-      unoptimized={isExternal}
+      loading={priority ? "eager" : undefined}
+      loader={loader}
+      unoptimized={unoptimized}
       className={imageClassName}
       onError={() => setHasError(true)}
     />
@@ -129,9 +150,10 @@ export function EditableImage({
               setHasError(false);
               setIsModalOpen(false);
               showToast("Saved");
-            } catch {
+            } catch (err) {
               showToast("Save failed", "error");
-              throw new Error("save-failed");
+              // Rethrown so the modal stays open and shows the reason.
+              throw err;
             }
           }}
         />
@@ -169,19 +191,39 @@ function EditImageModal({
       let nextSrc = currentSrc;
 
       if (file) {
+        if (!ALLOWED_TYPES.includes(file.type)) {
+          throw new Error("Unsupported file type. Use JPEG, PNG, WebP, or GIF.");
+        }
+        if (file.size > MAX_FILE_SIZE) {
+          throw new Error("File is too large (max 8MB)");
+        }
+
+        // The server signs the upload; the file goes straight to Cloudinary.
+        const signResponse = await fetch("/api/upload", { method: "POST" });
+        const signed = await signResponse.json().catch(() => null);
+        if (!signResponse.ok || !signed) {
+          throw new Error(signed?.error ?? "Upload failed");
+        }
+
         const formData = new FormData();
+        for (const [key, value] of Object.entries(signed.fields)) {
+          formData.append(key, String(value));
+        }
         formData.append("file", file);
-        const response = await fetch("/api/upload", {
+        const response = await fetch(signed.uploadUrl, {
           method: "POST",
           body: formData,
         });
-        if (!response.ok) {
-          const data = await response.json().catch(() => null);
-          throw new Error(data?.error ?? "Upload failed");
+        const data = await response.json().catch(() => null);
+        if (!response.ok || !data?.secure_url) {
+          throw new Error(data?.error?.message ?? "Upload failed");
         }
-        const data = (await response.json()) as { url: string };
-        nextSrc = data.url;
+        nextSrc = data.secure_url;
       } else if (urlInput.trim()) {
+        // Anything else can't be rendered as an image source.
+        if (!/^(https?:\/\/|\/)/.test(urlInput.trim())) {
+          throw new Error("Enter a full image URL, starting with https://");
+        }
         nextSrc = urlInput.trim();
       }
 

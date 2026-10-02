@@ -7,7 +7,7 @@ import { OfficeMap } from "./OfficeMap";
 /**
  * mailto:/tel: link for a contact detail, or null when it's plain text.
  * Lives here rather than in lib/content so this client component doesn't
- * pull that module's `fs` import into the browser bundle.
+ * pull that server-only module (it talks to MongoDB) into the browser bundle.
  */
 function contactDetailHref(detail: ContactDetail): string | null {
   if (detail.type === "email") return `mailto:${detail.value.trim()}`;

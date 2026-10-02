@@ -84,6 +84,7 @@ export function StudioView({
               alt={image.alt}
               fill
               sizes="36rem"
+              priority
               altLabel="Alt text"
               wrapperClassName={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${
                 index === activeImageIndex

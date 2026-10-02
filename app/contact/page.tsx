@@ -5,6 +5,8 @@ import { Contact } from "@/components/Contact/Contact";
 // than being prerendered at build time with a snapshot of the data.
 export const dynamic = "force-dynamic";
 
+export const metadata = { title: "Contact Us" };
+
 export default async function ContactPage() {
   const content = await readSiteContent();
   return <Contact content={content} />;

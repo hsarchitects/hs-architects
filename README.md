@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HS Architects
 
-## Getting Started
+Portfolio site for HS Architects. Next.js 16 (App Router), Tailwind CSS v4, MongoDB for content, Cloudinary for images.
 
-First, run the development server:
+## Setup
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. `npm install`
+2. Copy `.env.example` to `.env.local` and fill it in:
+   - `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH` — the admin sign-in. Generate the hash with `node scripts/hash-password.mjs "your-password"`.
+   - `SESSION_SECRET` — any long random string, e.g. `openssl rand -base64 32`.
+   - `MONGODB_URI` (and optionally `MONGODB_DB`) — where the site content lives.
+   - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` — where uploaded images go.
+   - `SITE_URL` — the public address, used for the sitemap and share previews. Optional on Vercel.
+3. `npm run dev` and open http://localhost:3000.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+All text and image references are one MongoDB document (`content` collection, `_id: "site"`). `content/site-content.json` and `public/uploads/` are only the starting seed.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`npm run migrate:content` uploads the seed images to Cloudinary and writes the seed content to MongoDB. **It replaces whatever content is in the database**, so run it once on a fresh database, not on a live one. Add `-- --dry-run` to see what it would do.
 
-## Learn More
+## Editing the site
 
-To learn more about Next.js, take a look at the following resources:
+Sign in at `/admin/login`. Every public page has an editable twin under `/admin` (`/admin`, `/admin/studio`, `/admin/about`, `/admin/projects`, `/admin/contact`, and each project page). Hover any text or image to edit it; changes save immediately.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If the same content is open in two tabs, or by two people, the second save is refused with a message asking to reload — nothing is overwritten silently.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Commands
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Development server |
+| `npm run build` / `npm start` | Production build and server |
+| `npm run lint` | ESLint |
+| `npm run migrate:content` | Seed MongoDB and Cloudinary (see above) |

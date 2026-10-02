@@ -7,9 +7,9 @@ import type {
 
 /**
  * Pure navigation helpers over the projects tree. Kept apart from lib/content
- * so client components can import them without dragging that module's `fs`
- * import into the browser bundle — the same reason ContactView keeps its own
- * href helper.
+ * so client components can import them without dragging that server-only
+ * module (it talks to MongoDB) into the browser bundle — the same reason
+ * ContactView keeps its own href helper.
  */
 
 /** One project, plus the category and discipline it sits in. */

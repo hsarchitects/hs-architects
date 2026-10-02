@@ -74,8 +74,8 @@ export function EditableText({
       await onSave(draft.trim());
       setIsOpen(false);
       showToast("Saved");
-    } catch {
-      setError("Couldn't save. Try again.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Couldn't save. Try again.");
       showToast("Save failed", "error");
     } finally {
       setIsSaving(false);

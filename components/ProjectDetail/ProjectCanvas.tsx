@@ -132,34 +132,51 @@ export function ProjectCanvas({
    * state and rethrows when a save fails, so catching it is what turns a
    * dropped request into a toast instead of an unhandled rejection — the
    * same treatment EditableText and EditableImage already give their saves.
+   * `rethrow` is for a caller that reports the outcome itself: the image
+   * modal has to see the failure, or it closes and announces "Saved".
    */
   const commit = useCallback(
-    async (next: ProjectImageRow[]) => {
+    async (next: ProjectImageRow[], rethrow = false) => {
       if (!onRowsChange) return;
       try {
         await onRowsChange(next);
         showToast("Saved");
-      } catch {
-        showToast("Couldn't save — check your connection", "error");
+      } catch (err) {
+        if (rethrow) throw err;
+        showToast(
+          err instanceof Error ? err.message : "Couldn't save — check your connection",
+          "error"
+        );
       }
     },
     [onRowsChange, showToast]
   );
 
   const replaceRow = useCallback(
-    (rowId: string, change: (row: ProjectImageRow) => ProjectImageRow) =>
-      commit(rows.map((row) => (row.id === rowId ? change(row) : row))),
+    (
+      rowId: string,
+      change: (row: ProjectImageRow) => ProjectImageRow,
+      rethrow = false
+    ) =>
+      commit(
+        rows.map((row) => (row.id === rowId ? change(row) : row)),
+        rethrow
+      ),
     [commit, rows]
   );
 
   const handleImageSave = useCallback(
     (rowId: string, imageId: string, next: { src: string; alt: string }) =>
-      replaceRow(rowId, (row) => ({
-        ...row,
-        items: row.items.map((item) =>
-          item.id === imageId ? { ...item, ...next } : item
-        ),
-      })),
+      replaceRow(
+        rowId,
+        (row) => ({
+          ...row,
+          items: row.items.map((item) =>
+            item.id === imageId ? { ...item, ...next } : item
+          ),
+        }),
+        true
+      ),
     [replaceRow]
   );
 
@@ -278,7 +295,10 @@ function CanvasRow({
   isAnyExpanded: boolean;
   isFirst: boolean;
   isLast: boolean;
-  onImageSave: (imageId: string, next: { src: string; alt: string }) => void;
+  onImageSave: (
+    imageId: string,
+    next: { src: string; alt: string }
+  ) => Promise<void> | void;
   onSpansChange: (spans: number[]) => void;
   onAspectChange: (aspect: number) => void;
   onAddImage: () => void;
@@ -565,7 +585,7 @@ function TileFrame({
 function EmptySlot({
   onSave,
 }: {
-  onSave: (next: { src: string; alt: string }) => void;
+  onSave: (next: { src: string; alt: string }) => Promise<void> | void;
 }) {
   return (
     <div className="absolute inset-0">

@@ -30,27 +30,27 @@ export function getCloudinary() {
   return cloudinary;
 }
 
-/** Uploads a buffer and resolves to the delivered (https) URL. */
-export function uploadBuffer(buffer: Buffer, filename?: string) {
+/**
+ * Signs one direct browser → Cloudinary upload. The file itself never passes
+ * through this server, so it isn't bound by a serverless host's request-body
+ * limit (4.5MB on Vercel). Everything in `params` is covered by the signature
+ * — the browser must send it unchanged, so it can't pick another folder or
+ * file type.
+ */
+export function signUpload() {
   const client = getCloudinary();
-  return new Promise<{ url: string; publicId: string }>((resolve, reject) => {
-    const stream = client.uploader.upload_stream(
-      {
-        folder: CLOUDINARY_FOLDER,
-        resource_type: "image",
-        // Let Cloudinary pick the best format and quality per request.
-        use_filename: Boolean(filename),
-        unique_filename: true,
-        overwrite: false,
-      },
-      (error, result) => {
-        if (error || !result) {
-          reject(error ?? new Error("Cloudinary upload failed"));
-          return;
-        }
-        resolve({ url: result.secure_url, publicId: result.public_id });
-      }
-    );
-    stream.end(buffer);
-  });
+  const { cloud_name, api_key, api_secret } = client.config();
+  const params = {
+    allowed_formats: "jpg,png,webp,gif",
+    folder: CLOUDINARY_FOLDER,
+    timestamp: Math.round(Date.now() / 1000),
+  };
+  return {
+    uploadUrl: `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
+    fields: {
+      ...params,
+      api_key: api_key!,
+      signature: client.utils.api_sign_request(params, api_secret!),
+    },
+  };
 }

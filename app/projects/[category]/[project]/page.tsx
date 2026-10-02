@@ -13,10 +13,20 @@ export async function generateMetadata({
   const { category, project } = await params;
   const content = await readSiteContent();
   const location = locateProject(content.projects, category, project);
-  if (!location) return { title: "HS Architects" };
+  if (!location) return {};
+
+  const { project: detail } = location.stop;
+  // First paragraph and first image that actually have something in them.
+  const description = detail.description.find((p) => p.text.trim())?.text;
+  const image = detail.rows.flatMap((row) => row.items).find((item) => item.src);
   return {
-    title: `${location.stop.project.title} — HS Architects`,
-    description: location.stop.project.description[0]?.text,
+    title: detail.title,
+    description,
+    openGraph: {
+      title: detail.title,
+      description,
+      images: image && [{ url: image.src, alt: image.alt }],
+    },
   };
 }
 

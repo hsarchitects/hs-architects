@@ -5,6 +5,8 @@ import { Studio } from "@/components/Studio/Studio";
 // than being prerendered at build time with a snapshot of the data.
 export const dynamic = "force-dynamic";
 
+export const metadata = { title: "Studio" };
+
 export default async function StudioPage() {
   const content = await readSiteContent();
   return <Studio content={content} />;

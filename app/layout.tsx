@@ -1,29 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { PageTransition } from "@/components/PageTransition";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "HS Architects",
+  metadataBase: new URL(SITE_URL),
+  title: { default: "HS Architects", template: "%s — HS Architects" },
   description: "Portfolio of HS Architects.",
+  openGraph: { siteName: "HS Architects", type: "website" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         <PageTransition>{children}</PageTransition>
       </body>
