@@ -4,28 +4,13 @@ import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Studio } from "@/components/Studio/Studio";
 import { EditModeProvider } from "./EditModeProvider";
-import { persistContent } from "./persistContent";
+import { useContentEditor } from "./useContentEditor";
 import type { SiteContent } from "@/lib/content";
 
 function AdminStudioEditorInner({ initialContent }: { initialContent: SiteContent }) {
   const router = useRouter();
-  const [content, setContent] = useState(initialContent);
+  const [content, updateAndPersist] = useContentEditor(initialContent);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-  const updateAndPersist = useCallback(
-    async (updater: (prev: SiteContent) => SiteContent) => {
-      const previous = content;
-      const updated = updater(previous);
-      setContent(updated);
-      try {
-        await persistContent(updated);
-      } catch (err) {
-        setContent(previous);
-        throw err;
-      }
-    },
-    [content]
-  );
 
   const handleLogoChange = useCallback(
     (next: { src: string; alt: string }) =>

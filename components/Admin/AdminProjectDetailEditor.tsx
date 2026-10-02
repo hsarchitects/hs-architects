@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ProjectDetailPage } from "@/components/ProjectDetail/ProjectDetail";
 import { EditModeProvider } from "./EditModeProvider";
-import { persistContent } from "./persistContent";
+import { useContentEditor } from "./useContentEditor";
 import type {
   ProjectDetail,
   ProjectImageRow,
@@ -46,27 +46,12 @@ function AdminProjectDetailEditorInner({
   projectId,
 }: AdminProjectDetailEditorProps) {
   const router = useRouter();
-  const [content, setContent] = useState(initialContent);
+  const [content, updateAndPersist] = useContentEditor(initialContent);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const location = useMemo(
     () => locateProject(content.projects, categoryId, projectId),
     [content, categoryId, projectId]
-  );
-
-  const updateAndPersist = useCallback(
-    async (updater: (prev: SiteContent) => SiteContent) => {
-      const previous = content;
-      const updated = updater(previous);
-      setContent(updated);
-      try {
-        await persistContent(updated);
-      } catch (err) {
-        setContent(previous);
-        throw err;
-      }
-    },
-    [content]
   );
 
   /** Rewrites this project's category, leaving the rest of the tree intact. */

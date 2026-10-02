@@ -6,30 +6,15 @@ import { Projects } from "@/components/Projects/Projects";
 import { blankProject } from "./AdminProjectDetailEditor";
 import { useEditMode } from "./EditModeContext";
 import { EditModeProvider } from "./EditModeProvider";
-import { persistContent } from "./persistContent";
+import { useContentEditor } from "./useContentEditor";
 import type { ProjectImageRow, ProjectSection, SiteContent } from "@/lib/content";
 import { adminProjectHref } from "@/lib/projects";
 
 function AdminProjectsEditorInner({ initialContent }: { initialContent: SiteContent }) {
   const router = useRouter();
   const { showToast } = useEditMode();
-  const [content, setContent] = useState(initialContent);
+  const [content, updateAndPersist] = useContentEditor(initialContent);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-  const updateAndPersist = useCallback(
-    async (updater: (prev: SiteContent) => SiteContent) => {
-      const previous = content;
-      const updated = updater(previous);
-      setContent(updated);
-      try {
-        await persistContent(updated);
-      } catch (err) {
-        setContent(previous);
-        throw err;
-      }
-    },
-    [content]
-  );
 
   /** Applies `change` to one section, leaving the rest of the content intact. */
   const updateSection = useCallback(
@@ -162,6 +147,13 @@ function AdminProjectsEditorInner({ initialContent }: { initialContent: SiteCont
     return saveSection(sectionId, (section) => ({
       ...section,
       links: section.links.filter((candidate) => candidate.id !== linkId),
+      // Tiles that pointed at this type go back to "Unselected".
+      rows: section.rows.map((row) => ({
+        ...row,
+        items: row.items.map(({ categoryId, ...item }) =>
+          categoryId === linkId ? item : { ...item, categoryId }
+        ),
+      })),
     }));
   }
 

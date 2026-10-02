@@ -27,7 +27,9 @@ function connect(): Promise<MongoClient> {
       "MONGODB_URI is not set — add it to .env.local (see README)."
     );
   }
-  return new MongoClient(uri).connect();
+  // The driver's default waits 30s for a server; a page shouldn't hang that
+  // long before showing the error screen.
+  return new MongoClient(uri, { serverSelectionTimeoutMS: 5000 }).connect();
 }
 
 export function getMongoClient(): Promise<MongoClient> {

@@ -1,4 +1,4 @@
-import { readSiteContent } from "@/lib/content";
+import { readLatestSiteContent } from "@/lib/content";
 import { AdminLandingEditor } from "@/components/Admin/AdminLandingEditor";
 
 // Content is read from MongoDB, so this route renders per request rather
@@ -6,6 +6,6 @@ import { AdminLandingEditor } from "@/components/Admin/AdminLandingEditor";
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
-  const content = await readSiteContent();
+  const content = await readLatestSiteContent();
   return <AdminLandingEditor initialContent={content} />;
 }

@@ -1,5 +1,6 @@
 import "server-only";
 import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { getDb } from "./mongodb";
 
 export type GalleryImage = {
@@ -179,9 +180,7 @@ export class ContentConflictError extends Error {
   }
 }
 
-// `cache` dedupes the read within one request — a page and its
-// generateMetadata share a single query.
-export const readSiteContent = cache(async (): Promise<SiteContent> => {
+async function readFromDb(): Promise<SiteContent> {
   const db = await getDb();
   const document = await db
     .collection<ContentDocument>(CONTENT_COLLECTION)
@@ -195,7 +194,31 @@ export const readSiteContent = cache(async (): Promise<SiteContent> => {
   }
 
   return document.content;
-});
+}
+
+/**
+ * Straight from MongoDB, for the admin: an editor must start from the true
+ * latest version or its first save is refused as stale.
+ *
+ * `cache` dedupes the read within one request — a page and its
+ * generateMetadata share a single query.
+ */
+export const readLatestSiteContent = cache(readFromDb);
+
+export const CONTENT_CACHE_TAG = "site-content";
+
+/**
+ * The public pages' read. Kept across requests, so a visit doesn't cost a
+ * database round trip and the site stays up through a brief outage. A save
+ * clears it (see api/content/update); the hourly expiry only covers writes
+ * that bypass the app, like `npm run migrate:content`.
+ */
+export const readSiteContent = cache(
+  unstable_cache(readFromDb, [CONTENT_CACHE_TAG], {
+    tags: [CONTENT_CACHE_TAG],
+    revalidate: 3600,
+  })
+);
 
 /** Saves the content and resolves to its new version. */
 export async function writeSiteContent(content: SiteContent): Promise<number> {
@@ -225,6 +248,9 @@ function isGalleryImage(value: unknown): value is GalleryImage {
     !!image &&
     typeof image.id === "string" &&
     typeof image.src === "string" &&
+    // Empty (a blank slot), a local path, or an http(s) URL — nothing else
+    // can be rendered as an image.
+    /^($|\/|https?:\/\/)/.test(image.src) &&
     typeof image.alt === "string"
   );
 }

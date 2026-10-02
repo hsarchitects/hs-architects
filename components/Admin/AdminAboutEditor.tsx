@@ -4,28 +4,13 @@ import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { About } from "@/components/About/About";
 import { EditModeProvider } from "./EditModeProvider";
-import { persistContent } from "./persistContent";
+import { useContentEditor } from "./useContentEditor";
 import type { AboutPerson, SiteContent } from "@/lib/content";
 
 function AdminAboutEditorInner({ initialContent }: { initialContent: SiteContent }) {
   const router = useRouter();
-  const [content, setContent] = useState(initialContent);
+  const [content, updateAndPersist] = useContentEditor(initialContent);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-  const updateAndPersist = useCallback(
-    async (updater: (prev: SiteContent) => SiteContent) => {
-      const previous = content;
-      const updated = updater(previous);
-      setContent(updated);
-      try {
-        await persistContent(updated);
-      } catch (err) {
-        setContent(previous);
-        throw err;
-      }
-    },
-    [content]
-  );
 
   /** Applies `change` to one person, leaving the rest of the content intact. */
   const updatePerson = useCallback(

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { readSiteContent } from "@/lib/content";
+import { readLatestSiteContent } from "@/lib/content";
 import { locateProject } from "@/lib/projects";
 import { AdminProjectDetailEditor } from "@/components/Admin/AdminProjectDetailEditor";
 
@@ -11,7 +11,7 @@ export default async function AdminProjectPage({
   params,
 }: PageProps<"/admin/projects/[category]/[project]">) {
   const { category, project } = await params;
-  const content = await readSiteContent();
+  const content = await readLatestSiteContent();
 
   if (!locateProject(content.projects, category, project)) notFound();
 

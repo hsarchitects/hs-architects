@@ -1,4 +1,4 @@
-import { readSiteContent } from "@/lib/content";
+import { readLatestSiteContent } from "@/lib/content";
 import { AdminAboutEditor } from "@/components/Admin/AdminAboutEditor";
 
 // Content is read from MongoDB, so this route renders per request rather
@@ -6,6 +6,6 @@ import { AdminAboutEditor } from "@/components/Admin/AdminAboutEditor";
 export const dynamic = "force-dynamic";
 
 export default async function AdminAboutPage() {
-  const content = await readSiteContent();
+  const content = await readLatestSiteContent();
   return <AdminAboutEditor initialContent={content} />;
 }

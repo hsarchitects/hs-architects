@@ -105,7 +105,14 @@ export function EditableText({
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 top-full z-50 mt-2 w-72 border border-stone-200 bg-white p-3 text-left shadow-lg">
+        // Capped to the text's own column where there is one: a narrow,
+        // clipping column (the project page's sidebars) would otherwise cut
+        // off the Save button. The bare-button form has no column to fit.
+        <div
+          className={`absolute left-0 top-full z-50 mt-2 w-72 border border-stone-200 bg-white p-3 text-left shadow-lg ${
+            showValue ? "max-w-full" : ""
+          }`}
+        >
           <label className="mb-1 block text-xs text-stone-500">{label}</label>
           {multiline ? (
             <textarea
